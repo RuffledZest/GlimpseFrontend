@@ -68,6 +68,7 @@ body {
   border-radius: 25px;
   padding: 4px;
   backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .dark .toggle-group {
@@ -83,21 +84,55 @@ body {
   font-weight: 500;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.toggle-btn:hover {
+  color: #333;
+  transform: scale(1.05);
 }
 
 .toggle-btn.active {
-  background: rgba(0, 0, 0, 0.8);
   color: white;
+  font-weight: 600;
 }
 
 .dark .toggle-btn {
   color: #ccc;
 }
 
+.dark .toggle-btn:hover {
+  color: #fff;
+}
+
 .dark .toggle-btn.active {
-  background: rgba(255, 255, 255, 0.9);
   color: #000;
+  font-weight: 600;
+}
+
+/* Sliding background effect */
+.toggle-group::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.dark .toggle-group::before {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Move the slider when ARNS is active */
+.toggle-group[data-active="ARNS"]::before {
+  transform: translateX(100%);
 }
 
 .nav-right {
@@ -181,7 +216,7 @@ body {
 .glimpse-title {
   font-size: clamp(8rem, 17vw, 24rem);
   font-weight: 900;
-  color: rgba(200, 200, 200, 0.3);
+  color: rgba(156, 156, 156, 0.3);
   letter-spacing: 0.1em;
   text-align: center;
   line-height: 0.8;
@@ -251,11 +286,13 @@ body {
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0
     rgba(255, 255, 255, 0.2);
+
+  scale: 1.02;
 }
 
 .dark .search-bar {
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 9px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -302,8 +339,8 @@ body {
   color: white;
   border: none;
   border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.2);

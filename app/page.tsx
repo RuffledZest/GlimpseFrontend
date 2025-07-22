@@ -7,6 +7,7 @@ import { Search, AlignLeft, ImageIcon, Video, Volume2, Sun, Moon } from "lucide-
 export default function GlimpseLanding() {
   const [isDark, setIsDark] = useState(false)
   const [activeFilter, setActiveFilter] = useState("text")
+  const [activeMode, setActiveMode] = useState("WEB")
 
   useEffect(() => {
     // Check for saved theme preference or default to light mode
@@ -40,9 +41,19 @@ export default function GlimpseLanding() {
           <div className="logo">GLIMPSE</div>
 
           <div className="nav-center">
-            <div className="toggle-group">
-              <button className="toggle-btn active">WEB</button>
-              <button className="toggle-btn">ARNS</button>
+            <div className="toggle-group" data-active={activeMode}>
+              <button 
+                className={`toggle-btn ${activeMode === "WEB" ? "active" : ""}`}
+                onClick={() => setActiveMode("WEB")}
+              >
+                WEB
+              </button>
+              <button 
+                className={`toggle-btn ${activeMode === "ARNS" ? "active" : ""}`}
+                onClick={() => setActiveMode("ARNS")}
+              >
+                ARNS
+              </button>
             </div>
           </div>
 
@@ -92,8 +103,14 @@ export default function GlimpseLanding() {
           <div className="search-container">
             <div className="search-bar">
               <Search className="search-icon" size={20} />
-              <input type="text" placeholder="Search for anything..." className="search-input" />
-              <button className="search-btn">Search</button>
+              <input 
+                type="text" 
+                placeholder={`Search the web for anything...`} 
+                className="search-input" 
+              />
+              <button className="search-btn">
+                Search 
+              </button>
             </div>
 
             <div className="filter-buttons">
@@ -118,7 +135,9 @@ export default function GlimpseLanding() {
 
         {/* Footer */}
         <footer className="footer">
-          <p>@Glimpse all rights reserved</p>
+          <p>
+            @Glimpse all rights reserved • Currently searching: {activeMode}
+          </p>
         </footer>
       </main>
     </div>
